@@ -1,10 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CartWithOrder from './components/cart_with_order';
 import { products } from './data/products';
-import './App.css'; // Importar App.css
+import './App.css';
 
 function App() {
-  const [cartItems, setCartItems] = useState([]);
+  // Leer el carrito desde localStorage al inicio
+  const [cartItems, setCartItems] = useState(() => {
+    const storedCart = localStorage.getItem('cartItems');
+    return storedCart ? JSON.parse(storedCart) : [];
+  });
+
+  // Cada vez que cartItems cambie, lo guardamos en localStorage
+  useEffect(() => {
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+  }, [cartItems]);
 
   const addToCart = (product) => {
     setCartItems(prevItems => {
@@ -20,6 +29,7 @@ function App() {
           return prevItems;
         }
       } else {
+        // cuando agregamos guardamos el stock también
         return [...prevItems, { ...product, quantity: 1 }];
       }
     });
@@ -29,20 +39,19 @@ function App() {
     setCartItems(prevItems => {
       return prevItems.map(item => {
         if (item.id === id) {
-          const product = products.find(p => p.id === id); // buscar el producto original
-          const maxStock = product?.stock ?? 0;
+          const maxStock = item.stock; // Usamos el stock que ya está en el item
           const newQuantity = item.quantity + delta;
           if (newQuantity > 0 && newQuantity <= maxStock) {
             return { ...item, quantity: newQuantity };
           }
           if (newQuantity <= 0) {
-            return null; // eliminar si llega a 0
+            return null;
           }
         }
         return item;
       }).filter(Boolean);
     });
-  };  
+  };
 
   return (
     <div className="container">
