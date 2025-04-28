@@ -1,35 +1,80 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react';
+import CartWithOrder from './components/cart_with_order';
+import { products } from './data/products';
+import './App.css'; // Importar App.css
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [cartItems, setCartItems] = useState([]);
+
+  const addToCart = (product) => {
+    setCartItems(prevItems => {
+      const itemInCart = prevItems.find(item => item.id === product.id);
+      if (itemInCart) {
+        if (itemInCart.quantity < product.stock) {
+          return prevItems.map(item =>
+            item.id === product.id
+              ? { ...item, quantity: item.quantity + 1 }
+              : item
+          );
+        } else {
+          return prevItems;
+        }
+      } else {
+        return [...prevItems, { ...product, quantity: 1 }];
+      }
+    });
+  };
+
+  const updateQuantity = (id, delta) => {
+    setCartItems(prevItems => {
+      return prevItems.map(item => {
+        if (item.id === id) {
+          const newQuantity = item.quantity + delta;
+          if (newQuantity > 0 && newQuantity <= item.stock) {
+            return { ...item, quantity: newQuantity };
+          }
+          if (newQuantity <= 0) {
+            return null;
+          }
+        }
+        return item;
+      }).filter(Boolean);
+    });
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="container">
+      <div className="products">
+        <h1>Food App</h1>
+        <div className="productList">
+          {products.map(product => (
+            <div key={product.id} className="productCard">
+              <span className="emoji">{product.emoji}</span>
+              <div className="stockArea">
+                {product.stock > 0 ? (
+                  <span>{product.stock}</span>
+                ) : (
+                  <span className="noStock">No stock</span>
+                )}
+              </div>
+              <div>${product.price}</div>
+              <button
+                onClick={() => addToCart(product)}
+                disabled={product.stock === 0}
+                className="addButton"
+              >
+                Agregar
+              </button>
+            </div>
+          ))}
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+
+      <div className="cartArea">
+        <CartWithOrder items={cartItems} updateQuantity={updateQuantity} />
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
