@@ -1,21 +1,30 @@
 import React from 'react';
 
 function ProductCard({ product, addToCart }) {
+  const isOutOfStock = product.stock === 0;
+
   return (
     <div className="productCard">
-      <span className="emoji">{product.emoji}</span>
+      <span className={`emoji ${isOutOfStock ? 'outOfStockElement' : ''}`}>
+        {product.emoji}
+      </span>
+
       <div className="stockArea">
-        {product.stock > 0 ? (
-          <span>{product.stock}</span>
+        {isOutOfStock ? (
+          <span className="noStock outOfStockElement">No stock</span>
         ) : (
-          <span className="noStock">No stock</span>
+          <span>{product.stock}</span>
         )}
       </div>
-      <div>${product.price}</div>
+
+      <div className={`price ${isOutOfStock ? 'outOfStockElement' : ''}`}>
+        ${product.price}
+      </div>
+
       <button
         onClick={() => addToCart(product)}
-        disabled={product.stock === 0}
-        className="addButton"
+        disabled={isOutOfStock}
+        className={`addButton ${isOutOfStock ? 'outOfStockElement' : ''}`}
       >
         Agregar
       </button>
