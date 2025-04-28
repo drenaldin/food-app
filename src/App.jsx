@@ -52,10 +52,26 @@ function App() {
     });
   };
 
+  const makeOrder = () => {
+    setProducts(prevProducts =>
+      prevProducts.map(product => {
+        const cartItem = cartItems.find(item => item.id === product.id);
+        if (cartItem) {
+          return {
+            ...product,
+            stock: product.stock - cartItem.quantity,
+          };
+        }
+        return product;
+      })
+    );
+    setCartItems([]);
+  };
+
   return (
     <div className="container">
       <ProductCatalog products={products} addToCart={addToCart} />
-      <CartWithOrder items={cartItems} updateQuantity={updateQuantity} />
+      <CartWithOrder items={cartItems} updateQuantity={updateQuantity} makeOrder={makeOrder} />
     </div>
   );
 }
