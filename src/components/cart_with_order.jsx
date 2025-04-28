@@ -17,6 +17,8 @@ function CartWithOrder({ items, updateQuantity, makeOrder }) { // Agrega makeOrd
       <div className="cartTotal">
         <span>Total:</span>
         <span>${total}</span>
+        </div>
+        <div className="cartButtons">
         <button onClick={makeOrder}>Pedir</button> {/* Llama directamente a makeOrder */}
       </div>
     </div>
