@@ -1,25 +1,18 @@
 import React from 'react';
+import CardItem from './cart_item';
 
 function CartWithOrder({ items, updateQuantity }) {
   const total = items.reduce((acc, item) => acc + item.quantity * item.price, 0);
 
   return (
-    <div className="cart">
+    <div className="cartArea">
       <h2>Cuenta</h2>
-      {items.map((item) => (
-        <div key={item.id} className="cartItem">
-          <span>{item.emoji} x {item.quantity}</span>
-          <div className="cartButtons">
-            <button
-              onClick={() => updateQuantity(item.id, 1)}
-              disabled={item.quantity >= item.stock}
-            >
-              +
-            </button>
-            <button onClick={() => updateQuantity(item.id, -1)}>-</button>
-            <span className="itemPrice">${item.quantity * item.price}</span>
-          </div>
-        </div>
+      {items.map(item => (
+        <CardItem
+          key={item.id}
+          item={item}
+          updateQuantity={updateQuantity}
+        />
       ))}
       <div className="cartTotal">
         <span>Total:</span>
