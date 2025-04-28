@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import ProductCatalog from './components/product_catalog';
 import CartWithOrder from './components/cart_with_order';
-import { products } from './data/products';
+import { products as productsData } from './data/products';
 import './App.css';
 
 function App() {
+  const [products, setProducts] = useState(productsData);
   const [cartItems, setCartItems] = useState(() => {
     const storedCart = localStorage.getItem('cartItems');
     return storedCart ? JSON.parse(storedCart) : [];
