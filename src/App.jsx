@@ -29,18 +29,20 @@ function App() {
     setCartItems(prevItems => {
       return prevItems.map(item => {
         if (item.id === id) {
+          const product = products.find(p => p.id === id); // buscar el producto original
+          const maxStock = product?.stock ?? 0;
           const newQuantity = item.quantity + delta;
-          if (newQuantity > 0 && newQuantity <= item.stock) {
+          if (newQuantity > 0 && newQuantity <= maxStock) {
             return { ...item, quantity: newQuantity };
           }
           if (newQuantity <= 0) {
-            return null;
+            return null; // eliminar si llega a 0
           }
         }
         return item;
       }).filter(Boolean);
     });
-  };
+  };  
 
   return (
     <div className="container">
