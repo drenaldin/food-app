@@ -13,6 +13,7 @@ function CardItem({ item, updateQuantity }) {
         </button>
         <button onClick={() => updateQuantity(item.id, -1)}>-</button>
         <span className="itemPrice">${item.quantity * item.price}</span>
+        <button onClick={() => updateQuantity(item.id, -item.quantity)}>x</button>
       </div>
     </div>
   );
