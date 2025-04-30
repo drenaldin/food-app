@@ -43,12 +43,9 @@ function App() {
           if (newQuantity > 0 && newQuantity <= maxStock) {
             return { ...item, quantity: newQuantity };
           }
-          if (newQuantity <= 0) {
-            return null;
-          }
         }
         return item;
-      }).filter(Boolean);
+      }).filter(({quantity}) => quantity > 0);
     });
   };
 
