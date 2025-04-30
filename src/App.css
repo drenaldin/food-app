@@ -15,9 +15,12 @@ span{
 }
 .productList {
   display: grid;
+  font-size: 40px;
+
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   margin-top: 20px;
+  float: left;
 }
 
 .productCard {
@@ -45,6 +48,9 @@ span{
 .noStock {
   color: red;
   font-size: 14px;
+}
+.tituloo{
+  display: block;
 }
 
 .addButton {
