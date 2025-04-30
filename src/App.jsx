@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import ProductCatalog from './components/product_catalog';
 import CartWithOrder from './components/cart_with_order';
-import { products } from './data/products';
+import { products as productsData } from './data/products';
 import './App.css';
 
 function App() {
+  const [products, setProducts] = useState(productsData);
   const [cartItems, setCartItems] = useState(() => {
     const storedCart = localStorage.getItem('cartItems');
     return storedCart ? JSON.parse(storedCart) : [];
@@ -51,10 +52,26 @@ function App() {
     });
   };
 
+  const makeOrder = () => {
+    setProducts(prevProducts =>
+      prevProducts.map(product => {
+        const cartItem = cartItems.find(item => item.id === product.id);
+        if (cartItem) {
+          return {
+            ...product,
+            stock: product.stock - cartItem.quantity,
+          };
+        }
+        return product;
+      })
+    );
+    setCartItems([]);
+  };
+
   return (
     <div className="container">
       <ProductCatalog products={products} addToCart={addToCart} />
-      <CartWithOrder items={cartItems} updateQuantity={updateQuantity} />
+      <CartWithOrder items={cartItems} updateQuantity={updateQuantity} makeOrder={makeOrder} />
     </div>
   );
 }

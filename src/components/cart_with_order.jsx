@@ -1,7 +1,7 @@
 import React from 'react';
 import CardItem from './cart_item';
 
-function CartWithOrder({ items, updateQuantity }) {
+function CartWithOrder({ items, updateQuantity, makeOrder }) { // Agrega makeOrder aquí
   const total = items.reduce((acc, item) => acc + item.quantity * item.price, 0);
 
   return (
@@ -17,6 +17,9 @@ function CartWithOrder({ items, updateQuantity }) {
       <div className="cartTotal">
         <span>Total:</span>
         <span>${total}</span>
+        </div>
+        <div className="cartButtons">
+        <button onClick={makeOrder}>Pedir</button> {/* Llama directamente a makeOrder */}
       </div>
     </div>
   );

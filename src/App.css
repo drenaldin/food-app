@@ -120,3 +120,34 @@ span{
   font-weight: bold;
   font-size: 22px;
 }
+
+.outOfStockElement {
+  opacity: 0.4;
+  transition: opacity 0.3s ease;
+}
+
+.noStock {
+  color: red;
+  font-weight: bold;
+}
+
+.price {
+  margin-top: 5px;
+}
+
+.addButton {
+  margin-top: 10px;
+  padding: 10px;
+  font-weight: bold;
+  border-radius: 8px;
+  border: none;
+  color: white;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.addButton:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+}
