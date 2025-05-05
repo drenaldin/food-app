@@ -40,7 +40,7 @@ function App() {
         if (item.id === id) {
           const maxStock = item.stock;
           const newQuantity = item.quantity + delta;
-          if (newQuantity > 0 && newQuantity <= maxStock) {
+          if (newQuantity >= 0 && newQuantity <= maxStock) {
             return { ...item, quantity: newQuantity };
           }
         }

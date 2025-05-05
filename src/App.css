@@ -4,6 +4,7 @@
   align-items: flex-start;
   padding: 40px;
   font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
 }
 
 .products {
@@ -29,7 +30,7 @@ span{
   border-radius: 10px;
   padding: 20px;
   text-align: center;
-  position: relative;
+  position: flex;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
