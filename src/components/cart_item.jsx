@@ -1,19 +1,31 @@
 import React from 'react';
 
-function CardItem({ item, updateQuantity }) {
+function CardItem({ item, updateQuantity,removeItem }) {
   return (
     <div className="cartItem">
-      <span>{item.emoji} x {item.quantity}</span>
+      <span className="itemInfo">{item.emoji} × {item.quantity}</span>
       <div className="cartButtons">
         <button
+          className="quantityButton minus"
+          onClick={() => updateQuantity(item.id, -1)}
+          disabled={item.quantity <= 1}
+        >
+          -
+        </button>
+        <button
+          className="quantityButton plus"
           onClick={() => updateQuantity(item.id, 1)}
           disabled={item.quantity >= item.stock}
         >
           +
         </button>
-        <button onClick={() => updateQuantity(item.id, -1)}>-</button>
-        <span className="itemPrice">${item.quantity * item.price}</span>
-        <button onClick={() => updateQuantity(item.id, -item.quantity)}>x</button>
+        <span className="itemPrice">${(item.quantity * item.price).toFixed(2)}</span>
+        <button
+          className="removeButton"
+          onClick={() => removeItem(item.id)}
+        >
+          ×
+        </button>
       </div>
     </div>
   );
