@@ -12,7 +12,6 @@
     { "id": 5, "name": "fries", "emoji": "🍟", "price": 100, "stock": 0 },
     { "id": 6, "name": "ramen", "emoji": "🍜", "price": 70, "stock": 7 }
     ],
-
     "orders": [
       {
         "id": 1,

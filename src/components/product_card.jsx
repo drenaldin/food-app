@@ -4,7 +4,7 @@ function ProductCard({ product, addToCart }) {
   const isOutOfStock = product.stock === 0;
 
   return (
-    <div className="productCard">
+    <div className="productCard" onClick={() => addToCart(product)}>
       <span className={`emoji ${isOutOfStock ? 'outOfStockElement' : ''}`}>
         {product.emoji}
       </span>
@@ -21,13 +21,13 @@ function ProductCard({ product, addToCart }) {
         ${product.price}
       </div>
 
-      <button
+      {/* <button
         onClick={() => addToCart(product)}
         disabled={isOutOfStock}
         className={`addButton ${isOutOfStock ? 'outOfStockElement' : ''}`}
       >
         Agregar
-      </button>
+      </button> */}
     </div>
   );
 }
