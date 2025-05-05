@@ -1,59 +1,28 @@
 import React from 'react';
+import CardItem from './cart_item';
 
-function CartWithOrder({ items, updateQuantity }) {
+function CartWithOrder({ items, updateQuantity, makeOrder }) { // Agrega makeOrder aquí
   const total = items.reduce((acc, item) => acc + item.quantity * item.price, 0);
 
   return (
-    <div style={styles.cart}>
+    <div className="cartArea">
       <h2>Cuenta</h2>
-      {items.map((item, index) => (
-        <div key={index} style={styles.item}>
-          <span>{item.emoji} x {item.quantity}</span>
-          <div style={styles.buttons}>
-            <button onClick={() => updateQuantity(index, 1)}>+</button>
-            <button onClick={() => updateQuantity(index, -1)}>-</button>
-            <span style={styles.price}>${item.quantity * item.price}</span>
-          </div>
-        </div>
+      {items.map(item => (
+        <CardItem
+          key={item.id}
+          item={item}
+          updateQuantity={updateQuantity}
+        />
       ))}
-      <div style={styles.total}>
+      <div className="cartTotal">
         <span>Total:</span>
         <span>${total}</span>
+        </div>
+        <div className="cartButtons">
+        <button onClick={makeOrder}>Pedir</button> {/* Llama directamente a makeOrder */}
       </div>
     </div>
   );
 }
-
-const styles = {
-  cart: {
-    border: '1px solid #ccc',
-    padding: '20px',
-    borderRadius: '10px',
-    width: '100%',
-  },
-  item: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: '10px',
-    fontSize: '18px',
-  },
-  buttons: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '5px',
-  },
-  price: {
-    marginLeft: '10px',
-    fontWeight: 'bold',
-  },
-  total: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    marginTop: '20px',
-    fontWeight: 'bold',
-    fontSize: '20px',
-  }
-};
 
 export default CartWithOrder;
