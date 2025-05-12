@@ -12,6 +12,10 @@
     { "id": 5, "name": "fries", "emoji": "🍟", "price": 100, "stock": 0 },
     { "id": 6, "name": "ramen", "emoji": "🍜", "price": 70, "stock": 7 }
     ],
+    "users": [
+      { "id": 1, "name": "Diego", "email": "diego@example.com" },
+      { "id": 2, "name": "Lucía", "email": "lucia@example.com" }
+    ],
     "orders": [
       {
         "id": 1,

@@ -1,4 +1,29 @@
-:root {
+body {
+  transition: background 0.3s, color 0.3s;
+  background: white;
+  color: black;
+}
+
+body.dark {
+  background: #121212;
+  color: white;
+}
+
+
+.button-theme-toggle {
+  padding: 10px 20px;
+  background: #ddd;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+body.dark .button-theme-toggle {
+  background: #333;
+  color: white;
+}
+
+:root.dark {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;

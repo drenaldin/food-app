@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ProductCatalog from './components/product_catalog';
 import CartWithOrder from './components/cart_with_order';
 import { products as productsData } from './data/products';
+import ThemeToggleButton from './components/ThemeToggleButton';
 import './App.css';
 
 function App() {
@@ -79,6 +80,7 @@ function App() {
     <div className="container">
       <ProductCatalog products={products} addToCart={addToCart} />
       <CartWithOrder items={cartItems} updateQuantity={updateQuantity} makeOrder={makeOrder} removeItem={removeItem} clearCart={clearCart} />
+      <ThemeToggleButton />
     </div>
   );
 }
