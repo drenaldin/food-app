@@ -1,4 +1,5 @@
 import React from 'react';
+import './stile_cart_item.css';
 
 function CardItem({ item, updateQuantity,removeItem }) {
   return (

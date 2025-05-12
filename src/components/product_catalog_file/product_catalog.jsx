@@ -1,5 +1,6 @@
 import React from 'react';
-import ProductCard from './product_card';
+import ProductCard from '../product_card_file/product_card';
+import './stile_product_catalog.css';
 
 function ProductCatalog({ products, addToCart }) {
   return (

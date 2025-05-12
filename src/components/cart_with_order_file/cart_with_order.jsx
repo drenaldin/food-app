@@ -1,5 +1,6 @@
 import React from 'react';
-import CardItem from './cart_item';
+import CardItem from '../cart_item_file/cart_item';
+import './stile_cart_with_order.css'
 
 function CartWithOrder({ items, updateQuantity, makeOrder,removeItem,clearCart }) { // Agrega makeOrder aquí
   const total = items.reduce((acc, item) => acc + item.quantity * item.price, 0);

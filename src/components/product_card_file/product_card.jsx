@@ -1,4 +1,5 @@
 import React from 'react';
+import './stile_product_card.css';
 
 function ProductCard({ product, addToCart }) {
   const isOutOfStock = product.stock === 0;
