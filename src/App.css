@@ -9,11 +9,13 @@
 }
 
 .products {
-  flex:2;
+  flex: 2;
 }
-span{
+
+span {
   font-size: 40px;
 }
+
 .productList {
   display: grid;
   font-size: 40px;
@@ -51,15 +53,17 @@ span{
   margin: 10px 0;
   position: absolute;
   right: 1rem;
-  top:0;
+  top: 0;
   font-weight: bold;
 }
 
 .noStock {
   color: red;
   font-size: 14px;
+  font-weight: bold;
 }
-.tituloo{
+
+.tituloo {
   display: block;
 }
 
@@ -72,6 +76,7 @@ span{
   color: white;
   background-color: #1a1a1a;
   cursor: pointer;
+  transition: opacity 0.3s ease;
 }
 
 .addButton:disabled {
@@ -80,12 +85,11 @@ span{
 }
 
 .cartArea {
-  flex:1;
+  flex: 1;
   border: 1px solid #ccc;
   border-radius: 10px;
   padding: 20px;
   position: relative;
-
 }
 
 .cart {
@@ -141,30 +145,8 @@ span{
   transition: opacity 0.3s ease;
 }
 
-.noStock {
-  color: red;
-  font-weight: bold;
-}
-
 .price {
   margin-top: 5px;
-}
-
-.addButton {
-  margin-top: 10px;
-  padding: 10px;
-  font-weight: bold;
-  border-radius: 8px;
-  border: none;
-  color: white;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: opacity 0.3s ease;
-}
-
-.addButton:disabled {
-  background-color: #555;
-  cursor: not-allowed;
 }
 
 .cartItem {
@@ -243,11 +225,68 @@ span{
   background: #ffcdd2;
 }
 
-.cartTitle{
+.cartTitle {
   place-content: space-between;
 }
-.button-theme-toggle{
+
+.button-theme-toggle {
   position: absolute;
   right: 1rem;
   top: 2rem;
+}
+
+/* -------------------- */
+/* 🌙 DARK / LIGHT MODE */
+/* -------------------- */
+
+body.light {
+  background-color: white;
+  color: black;
+}
+
+body.light .productCard,
+body.light .cartArea,
+body.light .cartItem,
+body.light .addButton,
+body.light .cartButtons button,
+body.light .quantityButton,
+body.light .removeButton {
+  background-color: white;
+  color: black;
+  border-color: #ccc;
+}
+
+body.dark {
+  background-color: #121212;
+  color: white;
+}
+
+body.dark .productCard,
+body.dark .cartArea,
+body.dark .cartItem,
+body.dark .addButton,
+body.dark .cartButtons button,
+body.dark .quantityButton,
+body.dark .removeButton {
+  background-color: #1e1e1e;
+  color: white;
+  border-color: #444;
+}
+
+body.dark .quantityButton.plus {
+  background-color: #2e7d32;
+  border-color: #1b5e20;
+  color: white;
+}
+
+body.dark .quantityButton.minus {
+  background-color: #ef6c00;
+  border-color: #e65100;
+  color: white;
+}
+
+body.dark .removeButton {
+  background-color: #c62828;
+  border-color: #b71c1c;
+  color: white;
 }

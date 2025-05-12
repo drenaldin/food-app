@@ -12,6 +12,12 @@ function App() {
     return storedCart ? JSON.parse(storedCart) : [];
   });
 
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    document.body.className = darkMode ? 'dark' : 'light';
+  }, [darkMode]);
+
   useEffect(() => {
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
   }, [cartItems]);
@@ -19,15 +25,15 @@ function App() {
   const addToCart = (product) => {
     setCartItems(prevItems => {
       if (product.stock <= 0) {
-        return prevItems; // No action if the product is out of stock
+        return prevItems;
       }
       const itemInCart = prevItems.find(item => item.id === product.id);
       if (itemInCart) {
         if (itemInCart.quantity < product.stock) {
           return prevItems.map(item =>
-        item.id === product.id
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
+            item.id === product.id
+              ? { ...item, quantity: item.quantity + 1 }
+              : item
           );
         } else {
           return prevItems;
@@ -49,7 +55,7 @@ function App() {
           }
         }
         return item;
-      }).filter(({quantity}) => quantity > 0);
+      }).filter(({ quantity }) => quantity > 0);
     });
   };
 
@@ -68,19 +74,27 @@ function App() {
     );
     setCartItems([]);
   };
+
   const removeItem = (id) => {
     setCartItems(prevItems => prevItems.filter(item => item.id !== id));
   };
 
   const clearCart = () => {
     setCartItems([]);
-  }
+  };
 
   return (
     <div className="container">
-      <ProductCatalog products={products} addToCart={addToCart} />
-      <CartWithOrder items={cartItems} updateQuantity={updateQuantity} makeOrder={makeOrder} removeItem={removeItem} clearCart={clearCart} />
-      <ThemeToggleButton />
+      <ProductCatalog products={products} addToCart={addToCart} darkMode={darkMode} />
+      <CartWithOrder
+        items={cartItems}
+        updateQuantity={updateQuantity}
+        makeOrder={makeOrder}
+        removeItem={removeItem}
+        clearCart={clearCart}
+        darkMode={darkMode}
+      />
+      <ThemeToggleButton darkMode={darkMode} setDarkMode={setDarkMode} />
     </div>
   );
 }
