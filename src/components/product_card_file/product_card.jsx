@@ -10,6 +10,11 @@ function ProductCard({ product, addToCart }) {
         {product.emoji}
       </span>
 
+      <div className="productInfo">
+        <h3>{product.name}</h3>
+        <p>{product.description}</p>
+      </div>
+
       <div className="stockArea">
         {isOutOfStock ? (
           <span className="noStock outOfStockElement">No stock</span>
@@ -21,15 +26,8 @@ function ProductCard({ product, addToCart }) {
       <div className={`price ${isOutOfStock ? 'outOfStockElement' : ''}`}>
         ${product.price}
       </div>
-
-      {/* <button
-        onClick={() => addToCart(product)}
-        disabled={isOutOfStock}
-        className={`addButton ${isOutOfStock ? 'outOfStockElement' : ''}`}
-      >
-        Agregar
-      </button> */}
     </div>
+
   );
 }
 

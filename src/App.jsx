@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import ProductCatalog from './components/product_catalog_file/product_catalog';
-import CartWithOrder from './components/cart_with_order_file/cart_with_order';
+import ProductCatalog from "./components/product_catalog_file/product_catalog";
+import CartWithOrder from "./components/cart_with_order_file/cart_with_order";
 import { products as productsData } from './data/products';
 import ThemeToggleButton from './components/ThemeToggleButton';
 
